@@ -13,7 +13,7 @@ const databaseId = env.NOTION_DATABASE_ID;
 export interface Task {
     id: string;
     title: string;
-    status: string;
+    status: NotionStatus;
     updatedAt: string;
     type?: string;
     color?: string;
@@ -22,12 +22,12 @@ export interface Task {
 
 export interface CreateTaskInput {
     title: string;
-    status?: string;
+    status?: NotionStatus;
 }
 
 export interface UpdateTaskInput {
     title?: string;
-    status?: string;
+    status?: NotionStatus;
 }
 
 /**
