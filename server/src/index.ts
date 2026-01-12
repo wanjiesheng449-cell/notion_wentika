@@ -7,7 +7,11 @@ const app = express();
 const PORT = env.PORT;
 
 // 中间件
-app.use(cors());
+// CORS: 允许前端域名访问（包括 Render Static Site）
+app.use(cors({
+    origin: true, // 允许所有来源（生产环境应该限制为具体域名）
+    credentials: true,
+}));
 app.use(express.json());
 
 // 健康检查

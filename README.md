@@ -146,12 +146,45 @@ cd server && npm start
 
 ## 部署指南
 
+### Render 前后端分离部署（推荐）
+
+#### 1. 后端部署 (Render Web Service)
+
+1. 创建新的 Web Service
+2. 连接 GitHub 仓库
+3. 配置设置：
+   - **Root Directory**: `server`
+   - **Build Command**: `npm install && npm run build`
+   - **Start Command**: `npm start`
+4. 配置环境变量：
+   - `NOTION_TOKEN` - 你的 Notion Integration Secret
+   - `NOTION_DATABASE_ID` - Notion 数据库 ID
+   - `PORT` - 可选，Render 会自动提供
+5. 部署后记录下后端 URL（例如：`https://notion-xiaofu.onrender.com`）
+
+#### 2. 前端部署 (Render Static Site)
+
+1. 创建新的 Static Site
+2. 连接 GitHub 仓库
+3. 配置设置：
+   - **Root Directory**: 留空（使用根目录）
+   - **Build Command**: `npm install && npm run build`
+   - **Publish Directory**: `dist`
+4. 配置环境变量：
+   - `VITE_API_BASE_URL` - 后端 URL（例如：`https://notion-xiaofu.onrender.com`）
+5. 部署成功后打开前端 URL 即可使用
+
+> **重要**：前端必须配置 `VITE_API_BASE_URL` 环境变量指向后端服务 URL，否则 API 请求会失败。
+
+---
+
 ### Vercel (推荐前端)
 
 1. 前端部署到 Vercel:
    - 连接 GitHub 仓库
    - Build Command: `npm run build`
    - Output Directory: `dist`
+   - Environment Variables: `VITE_API_BASE_URL=你的后端URL`
 
 2. 后端部署到其他平台（见下方）
 

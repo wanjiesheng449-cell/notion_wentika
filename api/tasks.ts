@@ -1,6 +1,8 @@
 import { Task } from '../types';
 
-const API_BASE_URL = import.meta.env.VITE_API_BASE_URL || '/api';
+// 生产环境使用完整后端 URL（如 https://xxx.onrender.com）
+// 开发环境为空，使用相对路径配合 vite proxy
+const API_BASE_URL = import.meta.env.VITE_API_BASE_URL || '';
 
 class ApiError extends Error {
     constructor(public status: number, message: string) {
@@ -21,7 +23,7 @@ async function handleResponse<T>(response: Response): Promise<T> {
  * 获取所有任务列表
  */
 export async function fetchTasks(): Promise<Task[]> {
-    const response = await fetch(`${API_BASE_URL}/tasks`);
+    const response = await fetch(`${API_BASE_URL}/api/tasks`);
     return handleResponse<Task[]>(response);
 }
 
@@ -29,7 +31,7 @@ export async function fetchTasks(): Promise<Task[]> {
  * 获取单个任务详情
  */
 export async function fetchTaskById(id: string): Promise<Task> {
-    const response = await fetch(`${API_BASE_URL}/tasks/${id}`);
+    const response = await fetch(`${API_BASE_URL}/api/tasks/${id}`);
     return handleResponse<Task>(response);
 }
 
@@ -37,7 +39,7 @@ export async function fetchTaskById(id: string): Promise<Task> {
  * 创建新任务
  */
 export async function createTask(data: { title: string; status?: string }): Promise<Task> {
-    const response = await fetch(`${API_BASE_URL}/tasks`, {
+    const response = await fetch(`${API_BASE_URL}/api/tasks`, {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json',
@@ -51,7 +53,7 @@ export async function createTask(data: { title: string; status?: string }): Prom
  * 更新任务
  */
 export async function updateTask(id: string, data: { title?: string; status?: string }): Promise<Task> {
-    const response = await fetch(`${API_BASE_URL}/tasks/${id}`, {
+    const response = await fetch(`${API_BASE_URL}/api/tasks/${id}`, {
         method: 'PATCH',
         headers: {
             'Content-Type': 'application/json',
