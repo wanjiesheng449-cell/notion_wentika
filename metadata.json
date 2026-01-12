@@ -1,0 +1,5 @@
+{
+  "name": "Notion-style Task Grid View",
+  "description": "A high-fidelity task management UI inspired by Notion's gallery view, featuring a dark/light mode adaptable grid, task details drawer, and responsive design.",
+  "requestFramePermissions": []
+}
