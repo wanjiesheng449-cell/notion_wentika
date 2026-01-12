@@ -47,7 +47,9 @@ function pageToTask(page: PageObjectResponse): Task {
     let status = DEFAULT_VALUES.STATUS;
     const statusProp = properties[NOTION_PROPERTIES.STATUS];
     if (statusProp?.type === 'status' && statusProp.status?.name) {
-        status = statusProp.status.name;
+        status = isValidStatus(statusProp.status.name)
+            ? statusProp.status.name
+            : DEFAULT_VALUES.STATUS;
     }
 
     return {
